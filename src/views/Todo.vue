@@ -6,7 +6,7 @@
             <p>Pending tasks: {{ todos.filter(todo => {return todo.done === false}).length }}</p>
             <div class="relative">
                 <transition-group name="slide-fade">
-                    <task v-on:complete-task="completeTask" v-on:delete-task="deleteTask" v-for="task in todos" :key="task.title" :task="task"></task>
+                    <task v-on:complete-task="completeTask" v-on:delete-task="deleteTask" v-for="task in todos" :key="task.id" :task="task"></task>
                 </transition-group>
             </div>
 
@@ -34,8 +34,8 @@
         data() {
             return {
                 todos: todos,
-                deletedTask: null
-            }
+                deletedTask: null,
+        }
         },
         mounted() {
             EventBus.$on('task-deleted', data => {
@@ -52,8 +52,13 @@
                 console.log(this.todos)
             },
             createTask(payload) {
-                let id = this.todos[this.todos.length - 1].id;
-                this.todos.unshift({id: ++id, name: payload.title, desc: payload.desc, done: payload.done})
+                let arr = this.todos.concat().sort((a,b) => (a.id - b.id));
+                let id = this.todos.length ? arr[arr.length - 1].id : 0;
+                console.log(id);
+                console.log(arr.length);
+                console.log(this.todos.length);
+
+                this.todos.unshift({id: id + 1, title: payload.title, desc: payload.desc, done: payload.done})
             },
             completeTask(task) {
                 const todoIndex = this.todos.indexOf(task);
@@ -61,7 +66,6 @@
             },
             infoTask(data) {
                 this.deletedTask = data.title
-                console.log(this.deletedTask)
             }
         }
     }

@@ -16,8 +16,8 @@
                 <div class="px-3 py-2" v-show="isEditing">
                     <div>
                         <div class="">
-                            <label class="block text-grey-darkest text-sm font-medium mb-1" for="task_name">Title</label>
-                            <input class="p-2 w-full border-grey border rounded mb-3" id="task_name" type="text" v-model="task.title" >
+                            <label class="block text-grey-darkest text-sm font-medium mb-1" for="task_title">Title</label>
+                            <input class="p-2 w-full border-grey border rounded mb-3" id="task_title" type="text" v-model="task.title" >
                         </div>
                         <div class="">
                             <label class="block text-grey-darkest text-sm font-medium mb-1" for="task_desc">Project</label>
