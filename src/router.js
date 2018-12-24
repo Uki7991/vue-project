@@ -22,6 +22,11 @@ export default new Router({
       path: '/todo',
       name: 'todo',
       component: Todo
+    },
+    {
+      path: '/category/:slug',
+      name: 'category',
+      component: Todo
     }
   ],
   mode: 'history'

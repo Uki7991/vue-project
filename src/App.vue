@@ -5,14 +5,34 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/todo">Todo</router-link>
     </div>
+    <div class="container-none mx-auto">
+      <div class="inline-flex">
+        <app-menu v-for="menu in menus" :key="menu.id" :menu="menu" />
+      </div>
+    </div>
     <router-view/>
   </div>
 </template>
 
 
 <script>
+  import axios from 'axios'
+  import AppMenu from './components/Menu'
+
   export default {
     name: 'app',
+    components: {
+      AppMenu
+    },
+    data: () => ({
+      menus: []
+    }),
+    created() {
+      axios.get('http://aliyawholesale.com/api/menu').then(res => {
+        this.menus = res.data;
+        console.log(this.menus)
+      });
+    }
   }
 </script>
 
